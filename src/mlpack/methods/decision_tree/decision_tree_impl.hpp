@@ -1075,10 +1075,11 @@ void DecisionTree<FitnessFunction,
   for (size_t i = 0; i < children.size(); ++i)
   {
     DecisionTree* node = children[i];
-    if(node->children.size() == 0)
+    if (node->children.size() == 0)
     {
       std::vector<DecisionTree*> childrenbacktrack = children;
-      size_t dimensionTypeOrMajorityClassbacktrack = dimensionTypeOrMajorityClass;
+      size_t dimensionTypeOrMajorityClassbacktrack = 
+          dimensionTypeOrMajorityClass;
       arma::vec classProbabilitiesbacktrack = classProbabilities;
 
       // Calculate class probabilities of present node because its child is
@@ -1093,7 +1094,7 @@ void DecisionTree<FitnessFunction,
       children.clear();
       double newScore = ValidateScore(root, validData, validLabels);
 
-      //Pruning the tree if the pruned tree gives better accuracy.
+      // Pruning the tree if the pruned tree gives better accuracy.
       if (newScore > bestScore)
       {
         bestScore = newScore;
@@ -1101,7 +1102,7 @@ void DecisionTree<FitnessFunction,
       }
       else
       {
-        //backtracking in case accuracy is not increased.
+        // backtracking in case accuracy is not increased.
         children = childrenbacktrack;
         dimensionTypeOrMajorityClass = dimensionTypeOrMajorityClassbacktrack;
         classProbabilities = classProbabilitiesbacktrack;
@@ -1137,7 +1138,7 @@ double DecisionTree<FitnessFunction,
   size_t correctClassification = 0;
   for (size_t i = 0; i < validLabels.n_elem; ++i)
   {
-    if(validLabels[i] == predictions[i])
+    if (validLabels[i] == predictions[i])
       correctClassification++;
   }
   return (correctClassification/validLabels.n_elem);
