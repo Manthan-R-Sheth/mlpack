@@ -1166,7 +1166,7 @@ BOOST_AUTO_TEST_CASE(PostPruneDecisionTree)
   wdcorrect /= predictions.n_elem;
 
   DecisionTree<>* root = &wd;
-  double bestScore = 0.0;
+  double bestScore = wdcorrect;
   //Reset the predictions
   predictions.zeros();
   wd.Prune<true>(root, labels, 3, weights, testData, trueTestLabels, bestScore);
